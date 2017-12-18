@@ -1,0 +1,23 @@
+.headerComponent {
+    background: #444444;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+.headerComponent a, .headerComponent div {
+    color: #EEEEEE;
+}
+
+.headerComponent a:link, 
+.headerComponent a:visited, 
+.headerComponent a:hover, 
+.headerCompnoent a:active {
+    text-decoration: none;
+}
+
+
+
