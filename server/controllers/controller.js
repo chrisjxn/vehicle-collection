@@ -17,5 +17,24 @@ module.exports = {
         db.get_vehicle([req.params.vehicleId]).then(vehicle => {
             res.status(200).send(vehicle)
         })
+    },
+    getUserCollection: (req, res) => {
+        let db = req.app.get('db');
+        db.get_user_collection([req.params.userId]).then(userCollection => {
+            res.status(200).send(userCollection)
+        })
+    },
+    updateVehicle: (req, res) => {
+        const { vehicleId, type, color, description } = req.body;
+        let db = req.app.get('db');
+        db.update_vehicle([vehicleId, type, color, description]).then(updatedVehicle => {
+            res.status(200).send(updatedVehicle)
+        })
+    },
+    deleteVehicle: (req, res) => {
+        let db = req.app.get('db');
+        db.delete_vehicle([req.params.vehicleId]).then(vehicle => {
+            res.status(200).send(vehicle)
+        })
     }
 };

@@ -1,0 +1,6 @@
+.collectionTableData:link, 
+.collectionTableData:visited, 
+.collectionTableData:hover, 
+.collectionTableData:active {
+    text-decoration: none;
+}

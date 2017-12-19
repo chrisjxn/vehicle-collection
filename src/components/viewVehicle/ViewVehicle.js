@@ -13,7 +13,7 @@ class ViewVehicle extends Component {
         const { vehicle } = this.props;
 
         if (vehicle.length === 0) {
-            return <div className="viewVehicleComponent"> Loading...</div>
+            return <div className="viewVehicleComponent">Loading...</div>
         }
 
         return (

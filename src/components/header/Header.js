@@ -24,7 +24,7 @@ class Header extends Component {
                                 Hi, {this.props.user.first_name}!
                             </div>
                             <Link className="navLinks" to={`/collections/${this.props.user.id}`}>Collection</Link>
-                            <Link className="navLinks" to={`/profile/${this.props.user.id}`}>Profile</Link>
+                            <Link className="navLinks" to={`/profiles/${this.props.user.id}`}>Profile</Link>
                             <Link className="navLinks" to='/'>Home</Link>
                             <a className="loginOut" href={process.env.REACT_APP_LOGOUT}>Logout</a>
                         </div>

@@ -81,7 +81,10 @@ app.get('/auth/logout', (req, res) => {
 // endpoints
 app.post('/api/collections', controller.addVehicle);
 app.get('/api/collections', controller.getVehicles);
-app.get('/api/vehicle/:vehicleId', controller.getVehicle);
+app.get('/api/collections/:userId', controller.getUserCollection);
+app.get('/api/vehicles/:vehicleId', controller.getVehicle);
+app.put('/api/vehicles/:vehicleId', controller.updateVehicle);
+app.delete('/api/vehicles/:vehicleId', controller.deleteVehicle);
 
 
 const PORT = 3030;

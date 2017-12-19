@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addVehicle } from '../../redux/reducer';
 import './AddVehicle.css';
 
@@ -12,11 +13,12 @@ class AddVehicle extends Component {
             description: this.refs.description.value
         };
         this.props.addVehicle(newVehicle, () => {
-            this.props.history.push('/');
+            this.props.history.push(`/collections/${this.props.user.id}`);
         });
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="addVehicleComponent">
                 <form
@@ -35,10 +37,17 @@ class AddVehicle extends Component {
                         className="formTextArea"
                         ref="description" />
                     <button type="submit">Add vehicle to collection</button>
+                    <Link to={`/collections/${this.props.user.id}`}><button>Cancel</button></Link>
                 </form>
             </div>
         )
     }
 }
 
-export default connect(null, { addVehicle })(AddVehicle);
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { addVehicle })(AddVehicle);

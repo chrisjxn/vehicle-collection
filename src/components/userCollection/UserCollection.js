@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getUserCollection } from '../../redux/reducer';
-import VehicleListItem from '../home/vehicleListItem/VehicleListItem';
+import CollectionListItem from './collectionListItem/CollectionListItem';
 import './UserCollection.css';
 
 class UserCollection extends Component {
@@ -13,7 +14,7 @@ class UserCollection extends Component {
     renderUserCollection() {
         return this.props.userCollection.map(vehicle => {
             return (
-                <VehicleListItem key={vehicle.id} vehicle={vehicle} />
+                <CollectionListItem key={vehicle.id} vehicle={vehicle} />
             )
         })
     }
@@ -35,10 +36,15 @@ class UserCollection extends Component {
                             <td>Color</td>
                             <td>Description</td>
                             <td>View</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
                         </tr>
                         {this.renderUserCollection()}
                     </tbody>
                 </table>
+                <div>
+                    <Link className="addVehicleLink" to='/vehicles/add'><button>Add vehicle</button></Link>
+                </div>
             </div>
         )
     }
