@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getUserInfo } from '../../redux/reducer';
 import './Header.css';
 
 class Header extends Component {
+    componentDidMount() {
+        this.props.getUserInfo();
+    }
+
     render() {
         return (
             <div className="headerComponent">
                 <nav className="nav">
                     {!this.props.user.id ?
                         <div className="navElements">
+                            <Link className="navLinks" to='/'>Home</Link>
                             <a className="loginOut" href={process.env.REACT_APP_LOGIN}>Login</a>
                         </div>
                         :
@@ -35,4 +41,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { getUserInfo })(Header);

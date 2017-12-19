@@ -1,0 +1,6 @@
+.vehicleTableData:link, 
+.vehicleTableData:visited, 
+.vehicleTableData:hover, 
+.vehicleTableData:active {
+    text-decoration: none;
+}

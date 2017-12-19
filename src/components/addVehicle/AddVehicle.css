@@ -1,3 +1,13 @@
 .addVehicleComponent {
     margin: 20px;
 }
+
+.vehicleForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.vehicleForm input, .vehicleForm textarea {
+    margin-bottom: 10px;
+}

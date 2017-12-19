@@ -67,11 +67,10 @@ app.get('/auth/callback', passport.authenticate('auth0', {
     failureRedirect: '/auth'
 }))
 app.get('/auth/me', (req, res) => {
-    console.log(req.user);
     if (req.user) {
         return res.status(200).send(req.user);
     } else {
-        return res.status(401).send('Please log in')
+        return res.status(200).send('Please log in')
     }
 })
 app.get('/auth/logout', (req, res) => {
@@ -80,6 +79,9 @@ app.get('/auth/logout', (req, res) => {
 })
 
 // endpoints
+app.post('/api/collections', controller.addVehicle);
+app.get('/api/collections', controller.getVehicles);
+app.get('/api/vehicle/:vehicleId', controller.getVehicle);
 
 
 const PORT = 3030;

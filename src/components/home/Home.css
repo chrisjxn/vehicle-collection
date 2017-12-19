@@ -1,3 +1,12 @@
 .homeComponent {
     margin: 20px;
 }
+
+table, td {
+    border: 1px solid lightgray;
+    padding: 5px 15px;
+}
+
+.tableHeaders {
+    font-weight: 500;
+}
