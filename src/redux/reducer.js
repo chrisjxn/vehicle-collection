@@ -3,7 +3,8 @@ import axios from 'axios';
 const initialState = {
     user: {},
     vehicle: [],
-    vehicles: []
+    vehicles: [],
+    userCollection: []
 };
 
 // action types
@@ -11,6 +12,7 @@ const GET_USER_INFO = 'GET_USER_INFO';
 const ADD_VEHICLE = 'ADD_VEHICLE';
 const GET_VEHICLES = 'GET_VEHICLES';
 const GET_VEHICLE = 'GET_VEHICLE';
+const GET_USER_COLLECTION = 'GET_USER_COLLECTION';
 
 
 // action creators
@@ -46,6 +48,14 @@ export function getVehicle(vehicleId) {
     }
 }
 
+export function getUserCollection(userId) {
+    const userCollection = axios.get(`/api/collections/${userId}`).then(res => res)
+    return {
+        type: GET_USER_COLLECTION,
+        payload: userCollection
+    }
+}
+
 
 // reducer
 export default function reducer(state = initialState, action) {
@@ -70,6 +80,13 @@ export default function reducer(state = initialState, action) {
         case GET_VEHICLE + '_FULFILLED':
             return Object.assign({}, state, { vehicle: action.payload.data });
         case GET_VEHICLE + '_REJECTED':
+            return state;
+
+        case GET_USER_COLLECTION + '_PENDING':
+            return state;
+        case GET_USER_COLLECTION + '_FULFILLED':
+            return Object.assign({}, state, { userCollection: action.payload.data });
+        case GET_USER_COLLECTION + '_REJECTED':
             return state;
 
         default:

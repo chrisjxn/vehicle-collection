@@ -19,7 +19,6 @@ class AddVehicle extends Component {
     render() {
         return (
             <div className="addVehicleComponent">
-                <div>This is the AddVehicle Component</div>
                 <form
                     className="vehicleForm"
                     onSubmit={this.onFormSubmit}>
