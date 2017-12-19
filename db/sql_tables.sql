@@ -13,7 +13,7 @@ CREATE TABLE vehicles (
     id SERIAL PRIMARY KEY, 
     user_id INT REFERENCES users(id), 
     type VARCHAR(20), 
-    color VARCHAR(20), 
+    color VARCHAR(40), 
     description VARCHAR(100), 
     photo_url TEXT
 );

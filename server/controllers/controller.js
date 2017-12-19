@@ -22,6 +22,8 @@ module.exports = {
         let db = req.app.get('db');
         db.get_user_collection([req.params.userId]).then(userCollection => {
             res.status(200).send(userCollection)
+
+            // could use req.user.id instead of req.params...
         })
     },
     updateVehicle: (req, res) => {
