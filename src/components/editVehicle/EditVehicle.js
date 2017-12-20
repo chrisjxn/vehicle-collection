@@ -34,10 +34,10 @@ class EditVehicle extends Component {
         })
     }
 
-    handleFormElementChange = (e, vehicleAttribute) => {
-        if (vehicleAttribute === 'type') this.setState({ type: e.target.value })
-        if (vehicleAttribute === 'color') this.setState({ color: e.target.value })
-        if (vehicleAttribute === 'description') this.setState({ description: e.target.value })
+    handleFormElementChange = (event, vehicleAttribute) => {
+        if (vehicleAttribute === 'type') this.setState({ type: event.target.value })
+        if (vehicleAttribute === 'color') this.setState({ color: event.target.value })
+        if (vehicleAttribute === 'description') this.setState({ description: event.target.value })
     }
 
     onFormSubmit = event => {

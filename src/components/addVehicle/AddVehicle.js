@@ -5,15 +5,31 @@ import { addVehicle } from '../../redux/reducer';
 import './AddVehicle.css';
 
 class AddVehicle extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            type: '',
+            color: '',
+            description: ''
+        }
+    }
+
+    handleFormElementChange = (event, vehicleAttribute) => {
+        if (vehicleAttribute === 'type') this.setState({ type: event.target.value })
+        if (vehicleAttribute === 'color') this.setState({ color: event.target.value })
+        if (vehicleAttribute === 'description') this.setState({ description: event.target.value })
+    }
+
     onFormSubmit = event => {
         event.preventDefault();
         const newVehicle = {
-            type: this.refs.type.value,
-            color: this.refs.color.value,
-            description: this.refs.description.value
+            type: this.state.type,
+            color: this.state.color,
+            description: this.state.description
         };
         this.props.addVehicle(newVehicle, () => {
-            this.props.history.push(`/collections/${this.props.user.id}`);
+            this.props.history.push(`/collections/${this.props.user.id}`)
         });
     }
 
@@ -26,18 +42,23 @@ class AddVehicle extends Component {
                     <input
                         placeholder="Vehicle type"
                         className="formInput"
-                        ref="type" />
+                        onChange={event => this.handleFormElementChange(event, 'type')}
+                        value={this.state.type} />
                     <input
                         placeholder="Vehicle color"
                         className="formInput"
-                        ref="color" />
+                        onChange={event => this.handleFormElementChange(event, 'color')}
+                        value={this.state.color} />
                     <textarea
                         placeholder="Vehicle description"
                         className="formTextArea"
-                        ref="description" />
+                        onChange={event => this.handleFormElementChange(event, 'description')}
+                        value={this.state.description} />
                     <button type="submit">Add vehicle to collection</button>
-                    <Link to={`/collections/${this.props.user.id}`}><button>Cancel</button></Link>
                 </form>
+                <div>
+                    <Link to={`/collections/${this.props.user.id}`}><button>Cancel</button></Link>
+                </div>
             </div>
         )
     }
