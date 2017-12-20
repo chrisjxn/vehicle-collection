@@ -21,11 +21,11 @@ class EditVehicle extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.vehicle.length === 0 && nextProps.vehicle.length !== 0) {
-            this.populateFormElements(nextProps);
+            this.populateVehicleInfo(nextProps);
         }
     }
 
-    populateFormElements = props => {
+    populateVehicleInfo = props => {
         if (props.vehicle.length === 0) return
         this.setState({
             type: props.vehicle[0].type,
@@ -34,7 +34,7 @@ class EditVehicle extends Component {
         })
     }
 
-    handleFormElementChange = (event, vehicleAttribute) => {
+    handleVehicleInfoChange = (event, vehicleAttribute) => {
         if (vehicleAttribute === 'type') this.setState({ type: event.target.value })
         if (vehicleAttribute === 'color') this.setState({ color: event.target.value })
         if (vehicleAttribute === 'description') this.setState({ description: event.target.value })
@@ -66,22 +66,22 @@ class EditVehicle extends Component {
                     <input
                         placeholder="Vehicle type"
                         className="formInput"
-                        onChange={event => this.handleFormElementChange(event, 'type')}
+                        onChange={event => this.handleVehicleInfoChange(event, 'type')}
                         value={this.state.type} />
                     <input
                         placeholder="Vehicle color"
                         className="formInput"
-                        onChange={event => this.handleFormElementChange(event, 'color')}
+                        onChange={event => this.handleVehicleInfoChange(event, 'color')}
                         value={this.state.color} />
                     <textarea
                         placeholder="Vehicle description"
                         className="formTextArea"
-                        onChange={event => this.handleFormElementChange(event, 'description')}
+                        onChange={event => this.handleVehicleInfoChange(event, 'description')}
                         value={this.state.description} />
                     <button type="submit">Save changes</button>
                 </form>
                 <div>
-                    <button onClick={() => this.populateFormElements(this.props)}>Cancel</button>
+                    <button onClick={() => this.populateVehicleInfo(this.props)}>Cancel</button>
                 </div>
             </div>
         )

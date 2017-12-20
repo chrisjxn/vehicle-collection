@@ -16,11 +16,12 @@ const GET_USER_COLLECTION = 'GET_USER_COLLECTION';
 const UPDATE_VEHICLE = 'UPDATE_VEHICLE';
 const DELETE_VEHICLE = 'DELETE_VEHICLE';
 const CLEAR_VEHICLE_ON_STATE = 'CLEAR_VEHICLE_ON_STATE'
+const UPDATE_USER = 'UPDATE_USER';
 
 
 // action creators
 export function getUserInfo() {
-    const user = axios.get('/auth/me').then(res => res.data)
+    const user = axios.get('/auth/me').then(res => res.data);
     return {
         type: GET_USER_INFO,
         payload: user
@@ -36,7 +37,7 @@ export function addVehicle(object, callback) {
 }
 
 export function getVehicles() {
-    const vehicles = axios.get('/api/collections').then(res => res)
+    const vehicles = axios.get('/api/collections').then(res => res);
     return {
         type: GET_VEHICLES,
         payload: vehicles
@@ -44,7 +45,7 @@ export function getVehicles() {
 }
 
 export function getVehicle(vehicleId) {
-    const vehicle = axios.get(`/api/vehicles/${vehicleId}`).then(res => res)
+    const vehicle = axios.get(`/api/vehicles/${vehicleId}`).then(res => res);
     return {
         type: GET_VEHICLE,
         payload: vehicle
@@ -52,7 +53,7 @@ export function getVehicle(vehicleId) {
 }
 
 export function getUserCollection(userId) {
-    const userCollection = axios.get(`/api/collections/${userId}`).then(res => res)
+    const userCollection = axios.get(`/api/collections/${userId}`).then(res => res);
     return {
         type: GET_USER_COLLECTION,
         payload: userCollection
@@ -79,6 +80,14 @@ export function clearVehicleOnState() {
     return {
         type: CLEAR_VEHICLE_ON_STATE,
         payload: null
+    }
+}
+
+export function updateUser(userId, object) {
+    const updatedUser = axios.put(`/api/users/${userId}`, object).then(res => res);
+    return {
+        type: UPDATE_USER,
+        payload: updatedUser
     }
 }
 
@@ -117,6 +126,13 @@ export default function reducer(state = initialState, action) {
 
         case CLEAR_VEHICLE_ON_STATE:
             return Object.assign({}, state, { vehicle: [] });
+
+        case UPDATE_USER + '_PENDING':
+            return state;
+        case UPDATE_USER + '_FULFILLED':
+            return Object.assign({}, state, { user: action.payload.data[0] });
+        case UPDATE_USER + '_REJECTED':
+            return state;
 
         default:
             return state;

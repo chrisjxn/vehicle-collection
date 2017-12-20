@@ -38,5 +38,12 @@ module.exports = {
         db.delete_vehicle([req.params.vehicleId]).then(vehicle => {
             res.status(200).send(vehicle)
         })
+    },
+    updateUser: (req, res) => {
+        const { userId, username, email, first_name, last_name, personal_url } = req.body;
+        let db = req.app.get('db');
+        db.update_user([userId, username, email, first_name, last_name, personal_url]).then(updatedUser => {
+            res.status(200).send(updatedUser)
+        })
     }
 };

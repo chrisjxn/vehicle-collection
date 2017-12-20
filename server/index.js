@@ -85,6 +85,7 @@ app.get('/api/collections/:userId', controller.getUserCollection);
 app.get('/api/vehicles/:vehicleId', controller.getVehicle);
 app.put('/api/vehicles/:vehicleId', controller.updateVehicle);
 app.delete('/api/vehicles/:vehicleId', controller.deleteVehicle);
+app.put('/api/users/:userId', controller.updateUser);
 
 
 const PORT = 3030;
