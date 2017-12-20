@@ -1,45 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getVehicle, updateVehicle } from '../../redux/reducer';
 import './EditVehicle.css';
 
 class EditVehicle extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            type: '',
+            color: '',
+            description: ''
+        }
+    }
+
     componentDidMount() {
         const { vehicleId } = this.props.match.params;
         this.props.getVehicle(vehicleId);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(this.props);
-    //     console.log(nextProps);
-    //     const { vehicleId } = this.props.match.params;
-    //     if (this.props.vehicle[0].id !== nextProps.vehicle[0].id) {
-    //         this.props.getVehicle(vehicleId)
-    //     }
-    // }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.vehicle.length === 0 && nextProps.vehicle.length !== 0) {
+            this.populateFormElements(nextProps);
+        }
+    }
+
+    populateFormElements = props => {
+        if (props.vehicle.length === 0) return
+        this.setState({
+            type: props.vehicle[0].type,
+            color: props.vehicle[0].color,
+            description: props.vehicle[0].description
+        })
+    }
+
+    handleFormElementChange = (e, vehicleAttribute) => {
+        if (vehicleAttribute === 'type') this.setState({ type: e.target.value })
+        if (vehicleAttribute === 'color') this.setState({ color: e.target.value })
+        if (vehicleAttribute === 'description') this.setState({ description: e.target.value })
+    }
 
     onFormSubmit = event => {
         event.preventDefault();
         const updatedVehicle = {
             vehicleId: this.props.vehicle[0].id,
-            type: this.refs.type.value,
-            color: this.refs.color.value,
-            description: this.refs.description.value
+            type: this.state.type,
+            color: this.state.color,
+            description: this.state.description
         };
         this.props.updateVehicle(this.props.vehicle[0].id, updatedVehicle, () => {
             this.props.history.push(`/collections/${this.props.user.id}`)
         });
     }
 
-    onCancelClick = () => {
-        console.log('Cancel button clicked')
-    }
-
     render() {
-        const { vehicle } = this.props;
-
-        if (vehicle.length === 0) {
+        if (this.props.vehicle.length === 0) {
             return <div className="editVehicleComponent">Loading...</div>
         }
 
@@ -51,23 +66,22 @@ class EditVehicle extends Component {
                     <input
                         placeholder="Vehicle type"
                         className="formInput"
-                        ref="type"
-                        defaultValue={vehicle[0].type} />
+                        onChange={event => this.handleFormElementChange(event, 'type')}
+                        value={this.state.type} />
                     <input
                         placeholder="Vehicle color"
                         className="formInput"
-                        ref="color"
-                        defaultValue={vehicle[0].color} />
+                        onChange={event => this.handleFormElementChange(event, 'color')}
+                        value={this.state.color} />
                     <textarea
                         placeholder="Vehicle description"
                         className="formTextArea"
-                        ref="description"
-                        defaultValue={vehicle[0].description} />
+                        onChange={event => this.handleFormElementChange(event, 'description')}
+                        value={this.state.description} />
                     <button type="submit">Save changes</button>
-                    <Link to={`/collections/${this.props.user.id}`}><button>Cancel</button></Link>
                 </form>
                 <div>
-                    <button onClick={this.onCancelClick}>Cancel</button>
+                    <button onClick={() => this.populateFormElements(this.props)}>Cancel</button>
                 </div>
             </div>
         )

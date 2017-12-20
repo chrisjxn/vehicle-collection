@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUserCollection } from '../../redux/reducer';
+import { getUserCollection, clearVehicleOnState } from '../../redux/reducer';
 import CollectionListItem from './collectionListItem/CollectionListItem';
 import './UserCollection.css';
 
@@ -9,6 +9,7 @@ class UserCollection extends Component {
     componentDidMount() {
         const { userId } = this.props.match.params
         this.props.getUserCollection(userId);
+        this.props.clearVehicleOnState();
     }
 
     renderUserCollection() {
@@ -56,4 +57,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getUserCollection })(UserCollection);
+export default connect(mapStateToProps, { getUserCollection, clearVehicleOnState })(UserCollection);

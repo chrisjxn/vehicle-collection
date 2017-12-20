@@ -15,6 +15,7 @@ const GET_VEHICLE = 'GET_VEHICLE';
 const GET_USER_COLLECTION = 'GET_USER_COLLECTION';
 const UPDATE_VEHICLE = 'UPDATE_VEHICLE';
 const DELETE_VEHICLE = 'DELETE_VEHICLE';
+const CLEAR_VEHICLE_ON_STATE = 'CLEAR_VEHICLE_ON_STATE'
 
 
 // action creators
@@ -74,6 +75,13 @@ export function deleteVehicle(vehicleId, callback) {
     }
 }
 
+export function clearVehicleOnState() {
+    return {
+        type: CLEAR_VEHICLE_ON_STATE,
+        payload: null
+    }
+}
+
 
 // reducer
 export default function reducer(state = initialState, action) {
@@ -106,6 +114,9 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { userCollection: action.payload.data });
         case GET_USER_COLLECTION + '_REJECTED':
             return state;
+
+        case CLEAR_VEHICLE_ON_STATE:
+            return Object.assign({}, state, { vehicle: [] });
 
         default:
             return state;
